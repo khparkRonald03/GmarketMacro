@@ -992,12 +992,16 @@ namespace GmarketMacro
 
             var AddFaildGoods = new List<DataModel>();
 
+            int attempt = 0;
+            int success = 0;
+
             //== 루프 시작
             foreach (var dataModel in goods)
             {
                 if (string.IsNullOrEmpty(dataModel.GooodsCode))
                     continue;
 
+                attempt++;
                 WriteMacroLog($"{dataModel.GooodsCode} 상품명 입력 시작");
 
                 Thread.Sleep(400);
@@ -1006,6 +1010,7 @@ namespace GmarketMacro
                 {
                     StopGetAdminAddData("동작 중지 : 상품코드 입력 중 오류가 발생하였습니다.");
                     WriteMacroLog("동작 중지 : 상품코드 입력 중 오류가 발생하였습니다.");
+                    WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
                     action.Close();
                     return;
                 }
@@ -1015,6 +1020,7 @@ namespace GmarketMacro
                 {
                     StopGetAdminAddData("동작 중지 : 검색 버튼 클릭 중 오류가 발생하였습니다.");
                     WriteMacroLog("동작 중지 : 검색 버튼 클릭 중 오류가 발생하였습니다.");
+                    WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
                     action.Close();
                     return;
                 }
@@ -1024,9 +1030,9 @@ namespace GmarketMacro
                 WriteMacroLog("테이블 클릭");
                 if (!action.DoubleClickGoodsTableRow("//*[@id='__grid_grid']/div[2]/table/tbody/tr[2]/td[1]", WriteMacroLog))
                 {
-                    StopGetAdminAddData("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
-                    WriteMacroLog("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
-                    return;
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog("Sold out 상품 발견 : Sold out 상품이 발견 되어 다음 상품 입력으로 넘어갑니다.");
+                    continue;
                 }
 
                 Thread.Sleep(600);
@@ -1075,6 +1081,7 @@ namespace GmarketMacro
                     //ShowThreadMessageBox($"오류 발생으로 인하여 동작을 중지 합니다. \r\n-마지막 동작 상품코드 : {DoneGoodsCode}");
                     StopGetAdminAddData($"오류 발생으로 인하여 동작을 중지 합니다. \r\n-마지막 동작 상품코드 : {DoneGoodsCode}");
                     WriteMacroLog($"{dataModel.GooodsCode} alert 메세지창 클릭 동작이 실패하여 동작 중지합니다.");
+                    WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
                     return;
                 }
 
@@ -1082,6 +1089,12 @@ namespace GmarketMacro
                 if (alertMessage.Contains("번역동의가"))
                 {
                     ignoreGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
+                }
+                else
+                {
+                    success++;
+                    WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
                 }
 
                 // 완료 된 것까지 저장 하여 중지버튼 클릭 시 표시해주기
@@ -1180,6 +1193,7 @@ namespace GmarketMacro
 
             action.Close();
             StopGetAdminAddData("상품명 수정이 완료 되었습니다.");
+            WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
             //ShowThreadMessageBox("상품명 수정이 완료 되었습니다.");
         }
 

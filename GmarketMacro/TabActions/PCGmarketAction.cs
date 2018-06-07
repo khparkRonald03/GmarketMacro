@@ -43,6 +43,13 @@ namespace GmarketMacro
                 // 타켓 Url -> http://gsearch.gmarket.co.kr/Listview/Search?keyword=%EC%A7%80%EC%98%A4%ED%95%84%EB%A1%9C%EC%9A%B0&type=IMG&pagesize=60&ordertype=&IsOversea=True&IsDeliveryFee=&IsGmarketBest=False&IsGmileage=False&IsDiscount=False&IsGstamp=False&IsBookCash=False&DelFee=&page=1&IsFeature=&IsGlobalSearch=undefined
                 new XPathModel() { Alias = "type1_6", PageNodeXPath = "//*[@id='srplist']/li/div/div/div[1]/a/@href", NumNodeXPath = "//*[@id='srplist']/li[{0}]/div/div/div[1]/a/@href", ParamCount = 1 },
 
+                // 타켓 Url -> (한글사이트) http://corners.gmarket.co.kr/Bestsellers
+                new XPathModel() { Alias = "type1_7", PageNodeXPath = "//*[@id='gBestWrap']/div/div[3]/div[2]/ul/li/div[1]/a/@href", NumNodeXPath = "//*[@id='gBestWrap']/div/div[3]/div[2]/ul/li[{0}]/div[1]/a/@href", ParamCount = 1 },
+
+                // 타켓 Url -> (한글사이트) http://corners.gmarket.co.kr/SuperDeals
+                new XPathModel() { Alias = "type1_8", PageNodeXPath = "//*[@id='container']/div[2]/ul/li/div/a/@href", NumNodeXPath = "//*[@id='container']/div[2]/ul/li[{0}]/div/a/@href", ParamCount = 1 },
+
+
                 // 2. 파라미터 2개
 
                 // 타켓 Url -> http://gpromotion.gmarket.co.kr/Plan/PlanView?sid=160357 
