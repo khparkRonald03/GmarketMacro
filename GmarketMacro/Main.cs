@@ -1204,9 +1204,9 @@ namespace GmarketMacro
             }
 
             action.Close();
-            StopGetAdminAddData("상품명 수정이 완료 되었습니다.");
-            WriteMacroLog($"업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건");
-            //ShowThreadMessageBox("상품명 수정이 완료 되었습니다.");
+            string resultMsg = $"-업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건";
+            StopGetAdminAddData($"상품명 수정이 완료 되었습니다. {Environment.NewLine}{resultMsg}");
+            WriteMacroLog(resultMsg);
         }
 
         #endregion
