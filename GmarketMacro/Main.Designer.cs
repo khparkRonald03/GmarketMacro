@@ -47,6 +47,7 @@
             this.iTalk_ControlBox1 = new iTalk.iTalk_ControlBox();
             this.iTalk_TabControl = new iTalk.iTalk_TabControl();
             this.tabCrawler = new System.Windows.Forms.TabPage();
+            this.CBLanguage = new iTalk.iTalk_ComboBox();
             this.LblTabActionText = new iTalk.iTalk_Label();
             this.nudStart = new iTalk.iTalk_NumericUpDown();
             this.CboFileNameType = new iTalk.iTalk_ComboBox();
@@ -332,6 +333,7 @@
             // tabCrawler
             // 
             this.tabCrawler.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.tabCrawler.Controls.Add(this.CBLanguage);
             this.tabCrawler.Controls.Add(this.BtnClearUrl);
             this.tabCrawler.Controls.Add(this.LblTabActionText);
             this.tabCrawler.Controls.Add(this.nudStart);
@@ -352,6 +354,28 @@
             this.tabCrawler.Size = new System.Drawing.Size(804, 565);
             this.tabCrawler.TabIndex = 0;
             this.tabCrawler.Text = "상품코드 수집";
+            // 
+            // CBLanguage
+            // 
+            this.CBLanguage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.CBLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.CBLanguage.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.CBLanguage.DropDownHeight = 100;
+            this.CBLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBLanguage.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.CBLanguage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.CBLanguage.FormattingEnabled = true;
+            this.CBLanguage.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.CBLanguage.IntegralHeight = false;
+            this.CBLanguage.ItemHeight = 20;
+            this.CBLanguage.Items.AddRange(new object[] {
+            "기본",
+            "중문"});
+            this.CBLanguage.Location = new System.Drawing.Point(371, 29);
+            this.CBLanguage.Name = "CBLanguage";
+            this.CBLanguage.Size = new System.Drawing.Size(76, 26);
+            this.CBLanguage.StartIndex = 0;
+            this.CBLanguage.TabIndex = 67;
             // 
             // LblTabActionText
             // 
@@ -481,12 +505,12 @@
             this.txtUrl.BackColor = System.Drawing.Color.Transparent;
             this.txtUrl.Font = new System.Drawing.Font("Tahoma", 11F);
             this.txtUrl.ForeColor = System.Drawing.Color.DimGray;
-            this.txtUrl.Location = new System.Drawing.Point(371, 27);
+            this.txtUrl.Location = new System.Drawing.Point(453, 27);
             this.txtUrl.MaxLength = 32767;
             this.txtUrl.Multiline = false;
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.ReadOnly = false;
-            this.txtUrl.Size = new System.Drawing.Size(308, 28);
+            this.txtUrl.Size = new System.Drawing.Size(226, 28);
             this.txtUrl.TabIndex = 57;
             this.txtUrl.Text = "링크를 입력하여 주세요.";
             this.txtUrl.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
@@ -897,6 +921,7 @@
         private iTalk.iTalk_TextBox_Small TxtFileName;
         private iTalk.iTalk_ComboBox CboFileNameType1;
         private iTalk.iTalk_TextBox_Small TxtFileName1;
+        private iTalk.iTalk_ComboBox CBLanguage;
     }
 }
 

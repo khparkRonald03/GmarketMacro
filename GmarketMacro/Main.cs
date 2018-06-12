@@ -41,6 +41,7 @@ namespace GmarketMacro
         long Tab1nudEnd { get; set; }
         int Tab1CboFileNameType { get; set; }
         string Tab1TxtFileName { get; set; }
+        int CBLanguageIndex { get; set; }
         string Tab2txtAdminIdTab1 { get; set; }
         string Tab2TxtGoodsCodeFilePath1 { get; set; }
         string Tab2TxtGoodsNameFilePath1 { get; set; }
@@ -201,6 +202,7 @@ namespace GmarketMacro
             Tab1nudEnd = nudEnd.Value;
             Tab1CboFileNameType =  CboFileNameType.SelectedIndex;
             Tab1TxtFileName = TxtFileName.Text;
+            CBLanguageIndex = CBLanguage.SelectedIndex;
 
             ClearGetGoodsCodeLog();
 
@@ -358,7 +360,7 @@ namespace GmarketMacro
                     break;
 
                 default: // G마켓 글로벌 PC 웹 사이트
-                    
+
                     var pcGmarketAction = new PCGmarketAction(SilentMode);
 
                     WriteGetGoodsCodeLog("2. 상품코드 가져오기 시작");
@@ -373,6 +375,16 @@ namespace GmarketMacro
                     {
                         WriteGetGoodsCodeLog("동작 중지");
                         return goods;
+                    }
+
+                    if (CBLanguageIndex == 1)
+                    {
+                        WriteGetGoodsCodeLog("3-1. 중문 페이지로 변경");
+                        if (!pcGmarketAction.SetLanguage(WriteGetGoodsCodeLog))
+                        {
+                            WriteGetGoodsCodeLog("동작 중지");
+                            return goods;
+                        }
                     }
 
                     switch (Tab1SelectedIndex)

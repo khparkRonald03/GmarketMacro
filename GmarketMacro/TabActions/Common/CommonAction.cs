@@ -74,6 +74,15 @@ namespace GmarketMacro
             return setUrlResult.ResultValue;
         }
 
+        public bool SetLanguage(Action<string> logFunc)
+        {
+            var clickTagResult = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='utill']/div/ul[1]/li[2]/a");
+            if (!clickTagResult.ResultFlag)
+                logFunc(clickTagResult.Err);
+
+            return clickTagResult.ResultValue;
+        }
+
         /// <summary>
         /// 현재 Url 가져오기
         /// </summary>
