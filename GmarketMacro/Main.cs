@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Data;
+using System.Runtime.InteropServices;
 
 namespace GmarketMacro
 {
@@ -144,8 +145,11 @@ namespace GmarketMacro
                 }
                 else
                 {
+                    SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     var showResult = new ShowResult(resultMsg);
+                    //SetWindowPos(showResult.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     showResult.ShowDialog();
+                    SetWindowPos(this.Handle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                 }
                     
             }
@@ -174,8 +178,15 @@ namespace GmarketMacro
                 }
                 else
                 {
+                    SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     var showResult = new ShowResult(resultMsg);
+                    //SetWindowPos(showResult.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     showResult.ShowDialog();
+                    SetWindowPos(this.Handle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+
+                    //var showResult = new ShowResult(resultMsg);
+                    //SetWindowPos(showResult.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+                    //showResult.ShowDialog();
                 }
 
                 DoneGoodsCode = string.Empty;
@@ -470,8 +481,10 @@ namespace GmarketMacro
                 }
                 else
                 {
+                    SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                     var showResult = new ShowResult(stopMsg);
                     showResult.ShowDialog();
+                    SetWindowPos(this.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
                 }
             }
         }
@@ -1277,6 +1290,21 @@ namespace GmarketMacro
         }
 
         #endregion
+
+
+        // Call this way:
+        //SetWindowPos(theWindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);// 설정을 해제할때 
+
+        const UInt32 SWP_NOSIZE = 0x0001;
+        const UInt32 SWP_NOMOVE = 0x0002;
+        const UInt32 SWP_SHOWWINDOW = 0x0040;
+
 
         #region 파일 경로 가져오기
 
