@@ -707,10 +707,12 @@ namespace GmarketMacro
                 WriteAdminCrawlerLog("테이블 클릭");
                 if (!action.DoubleClickGoodsTableRow("//*[@id='__grid_grid']/div[2]/table/tbody/tr[2]/td[1]", WriteAdminCrawlerLog))
                 {
-                    StopGetAdminData("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
-                    ShowTab2ProgragssIndicator(false);
-                    WriteAdminCrawlerLog("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
-                    return;
+                    //StopGetAdminData("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
+                    //ShowTab2ProgragssIndicator(false);
+                    //WriteAdminCrawlerLog("동작 중지 : 상품코드 테이블 클릭 중 오류가 발생되었습니다.");
+                    //return;
+                    WriteAdminCrawlerLog("상품 정보 없음 : 상품 정보가 없어 다음 상품명 수집으로 넘어갑니다.");
+                    continue;
                 }
 
                 Thread.Sleep(500);
@@ -912,7 +914,7 @@ namespace GmarketMacro
 
                     foreach (DataColumn column in dt.Columns)
                     {
-                        switch(column.ColumnName.Trim())
+                        switch (column.ColumnName.Trim())
                         {
                             // 국문은 입력하지 않음
                             case "상품코드":
@@ -932,9 +934,10 @@ namespace GmarketMacro
                                 break;
                         }
                     }
-                    
+
                     if (!string.IsNullOrEmpty(dataModel.GooodsCode))
                         goods.Add(dataModel);
+
                 }
             }
             catch (Exception e)
@@ -1012,6 +1015,30 @@ namespace GmarketMacro
             {
                 if (string.IsNullOrEmpty(dataModel.GooodsCode))
                     continue;
+
+                if (CheckingSpecialText(dataModel.NameCN))
+                {
+                    WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameCN}");
+                    continue;
+                }
+
+                if (CheckingSpecialText(dataModel.NameEN))
+                {
+                    WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameEN}");
+                    continue;
+                }
+
+                if (CheckingSpecialText(dataModel.NameJP))
+                {
+                    WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameJP}");
+                    continue;
+                }
+
+                if (CheckingSpecialText(dataModel.NameKOR))
+                {
+                    WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameKOR}");
+                    continue;
+                }
 
                 attempt++;
                 WriteMacroLog($"{dataModel.GooodsCode} 상품명 입력 시작");
@@ -1129,6 +1156,30 @@ namespace GmarketMacro
                     if (ignoreGoods.Any(g => g.GooodsCode == dataModel.GooodsCode))
                         continue;
 
+                    if (CheckingSpecialText(dataModel.NameCN))
+                    {
+                        WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameCN}");
+                        continue;
+                    }
+
+                    if (CheckingSpecialText(dataModel.NameEN))
+                    {
+                        WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameEN}");
+                        continue;
+                    }
+
+                    if (CheckingSpecialText(dataModel.NameJP))
+                    {
+                        WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameJP}");
+                        continue;
+                    }
+
+                    if (CheckingSpecialText(dataModel.NameKOR))
+                    {
+                        WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameKOR}");
+                        continue;
+                    }
+
                     WriteMacroLog($"[{dataModel.GooodsCode}] 상품명 가져오기 시작");
 
                     WriteMacroLog("상품코드 입력");
@@ -1207,6 +1258,22 @@ namespace GmarketMacro
             string resultMsg = $"-업로드 시도 {attempt} 건 / 성공 {success} 건 / 실패 {AddFaildGoods.Count} 건 / 번역 미동의 {ignoreGoods.Count} 건";
             StopGetAdminAddData($"상품명 수정이 완료 되었습니다. {Environment.NewLine}{resultMsg}");
             WriteMacroLog(resultMsg);
+        }
+
+        #endregion
+
+        #region 특수문자 검사
+
+        /// <summary>
+        /// 인자로 들어 문자에 특수 문자가 존재 하는지 여부를 검사 한다.        
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns></returns>
+        public bool CheckingSpecialText(string txt)
+        {
+            string str = @"[~!@\#$%^&*\()\=+|\\/:;?""<>']";
+            System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex(str);
+            return rex.IsMatch(txt);
         }
 
         #endregion
