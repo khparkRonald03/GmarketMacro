@@ -1284,6 +1284,18 @@ namespace GmarketMacro
         /// <returns></returns>
         public bool CheckingSpecialText(string txt)
         {
+            txt = txt.Replace("[", "");
+            txt = txt.Replace("]", "");
+            txt = txt.Replace("(", "");
+            txt = txt.Replace(")", "");
+            txt = txt.Replace("/", "");
+            txt = txt.Replace("/", "");
+            txt = txt.Replace("-", "");
+            txt = txt.Replace("_", "");
+            txt = txt.Replace("%", "");
+            txt = txt.Replace("+", "");
+            txt = txt.Replace("~", "");
+
             string str = @"[~!@\#$%^&*\()\=+|\\/:;?""<>']";
             System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex(str);
             return rex.IsMatch(txt);
