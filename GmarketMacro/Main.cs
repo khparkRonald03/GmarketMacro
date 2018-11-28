@@ -1031,24 +1031,28 @@ namespace GmarketMacro
 
                 if (CheckingSpecialText(dataModel.NameCN))
                 {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
                     WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameCN}");
                     continue;
                 }
 
                 if (CheckingSpecialText(dataModel.NameEN))
                 {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
                     WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameEN}");
                     continue;
                 }
 
                 if (CheckingSpecialText(dataModel.NameJP))
                 {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
                     WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameJP}");
                     continue;
                 }
 
                 if (CheckingSpecialText(dataModel.NameKOR))
                 {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
                     WriteMacroLog($"특수문자가 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameKOR}");
                     continue;
                 }
@@ -1295,6 +1299,20 @@ namespace GmarketMacro
             txt = txt.Replace("%", "");
             txt = txt.Replace("+", "");
             txt = txt.Replace("~", "");
+
+            txt = txt.Replace("!", "");  
+            txt = txt.Replace("#", "");  
+            txt = txt.Replace("*", "");  
+            txt = txt.Replace("=", "");  
+            txt = txt.Replace("$", "");  
+            txt = txt.Replace(@"\", "");  
+            txt = txt.Replace("|", "");  
+            txt = txt.Replace(":", "");  
+            txt = txt.Replace("<", ""); 
+            txt = txt.Replace(">", "");  
+            txt = txt.Replace(",", "");
+            txt = txt.Replace(".", "");
+            txt = txt.Replace("?", "");
 
             string str = @"[~!@\#$%^&*\()\=+|\\/:;?""<>']";
             System.Text.RegularExpressions.Regex rex = new System.Text.RegularExpressions.Regex(str);
