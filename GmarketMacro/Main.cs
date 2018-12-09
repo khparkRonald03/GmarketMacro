@@ -1057,6 +1057,34 @@ namespace GmarketMacro
                     continue;
                 }
 
+                if (!string.IsNullOrEmpty((dataModel.NameCN)) && dataModel.NameCN.Length > 100)
+                {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog($"100자 이상으로 입력된 번역상품이 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameCN}");
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty((dataModel.NameEN)) && dataModel.NameEN.Length > 100)
+                {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog($"100자 이상으로 입력된 번역상품이 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameEN}");
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty((dataModel.NameJP)) && dataModel.NameJP.Length > 100)
+                {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog($"100자 이상으로 입력된 번역상품이 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameJP}");
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty((dataModel.NameKOR)) && dataModel.NameKOR.Length > 100)
+                {
+                    AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                    WriteMacroLog($"100자 이상으로 입력된 번역상품이 발견되어 다음 입력으로 넘어갑니다. {dataModel.NameKOR}");
+                    continue;
+                }
+
                 attempt++;
                 WriteMacroLog($"{dataModel.GooodsCode} 상품명 입력 시작");
 
