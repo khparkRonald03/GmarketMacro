@@ -1029,6 +1029,8 @@ namespace GmarketMacro
                 if (string.IsNullOrEmpty(dataModel.GooodsCode))
                     continue;
 
+                attempt++;
+
                 if (CheckingSpecialText(dataModel.NameCN))
                 {
                     AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
@@ -1085,7 +1087,6 @@ namespace GmarketMacro
                     continue;
                 }
 
-                attempt++;
                 WriteMacroLog($"{dataModel.GooodsCode} 상품명 입력 시작");
 
                 Thread.Sleep(400);
