@@ -74,11 +74,52 @@ namespace GmarketMacro
             return setUrlResult.ResultValue;
         }
 
-        public bool SetLanguage(Action<string> logFunc)
+        public bool SetPCLanguage(Action<string> logFunc)
         {
             var clickTagResult = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='utill']/div/ul[1]/li[2]/a");
             if (!clickTagResult.ResultFlag)
                 logFunc(clickTagResult.Err);
+
+
+            return clickTagResult.ResultValue;
+        }
+
+        public bool SetMgCnLanguage(Action<string> logFunc)
+        {
+            // 언어 드랍다운리스트 클릭
+            var clickTagResult = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='sel_lang']");
+            if (!clickTagResult.ResultFlag)
+                logFunc(clickTagResult.Err);
+
+            // 중문 선택
+            var clickTagResult1 = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='sel_lang']/option[2]");
+            if (!clickTagResult1.ResultFlag)
+                logFunc(clickTagResult1.Err);
+
+            // 저장 버튼 클릭
+            var clickTagResult2 = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='footer']/div[5]/div[2]/div/div/a"); // saveButtonClicked();
+            if (!clickTagResult2.ResultFlag)
+                logFunc(clickTagResult2.Err);
+
+            return clickTagResult.ResultValue;
+        }
+
+        public bool SetMgJpLanguage(Action<string> logFunc)
+        {
+            // 언어 드랍다운리스트 클릭
+            var clickTagResult = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='sel_lang']");
+            if (!clickTagResult.ResultFlag)
+                logFunc(clickTagResult.Err);
+
+            // 일문 선택
+            var clickTagResult1 = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='sel_lang']/option[3]");
+            if (!clickTagResult1.ResultFlag)
+                logFunc(clickTagResult1.Err);
+
+            // 저장 버튼 클릭
+            var clickTagResult2 = webController.ClickTag(ElementsSelectType.XPath, "//*[@id='footer']/div[5]/div[2]/div/div/a"); // saveButtonClicked();
+            if (!clickTagResult2.ResultFlag)
+                logFunc(clickTagResult2.Err);
 
             return clickTagResult.ResultValue;
         }

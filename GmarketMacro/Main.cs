@@ -354,6 +354,25 @@ namespace GmarketMacro
                         return goods;
                     }
 
+                    if (CBLanguageIndex == 1)
+                    {
+                        WriteGetGoodsCodeLog("3-1. 중문 페이지로 변경");
+                        if (!mobileGmarketAction.SetMgCnLanguage(WriteGetGoodsCodeLog))
+                        {
+                            WriteGetGoodsCodeLog("동작 중지");
+                            return goods;
+                        }
+                    }
+                    else if (CBLanguageIndex == 2)
+                    {
+                        WriteGetGoodsCodeLog("3-1. 일문 페이지로 변경");
+                        if (!mobileGmarketAction.SetMgJpLanguage(WriteGetGoodsCodeLog))
+                        {
+                            WriteGetGoodsCodeLog("동작 중지");
+                            return goods;
+                        }
+                    }
+
                     switch (Tab1SelectedIndex)
                     {
                         case 0: // 페이지 단위
@@ -391,7 +410,7 @@ namespace GmarketMacro
                     if (CBLanguageIndex == 1)
                     {
                         WriteGetGoodsCodeLog("3-1. 중문 페이지로 변경");
-                        if (!pcGmarketAction.SetLanguage(WriteGetGoodsCodeLog))
+                        if (!pcGmarketAction.SetPCLanguage(WriteGetGoodsCodeLog))
                         {
                             WriteGetGoodsCodeLog("동작 중지");
                             return goods;

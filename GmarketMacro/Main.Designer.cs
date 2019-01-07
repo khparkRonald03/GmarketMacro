@@ -370,7 +370,8 @@
             this.CBLanguage.ItemHeight = 20;
             this.CBLanguage.Items.AddRange(new object[] {
             "기본",
-            "중문"});
+            "중문",
+            "일문"});
             this.CBLanguage.Location = new System.Drawing.Point(371, 29);
             this.CBLanguage.Name = "CBLanguage";
             this.CBLanguage.Size = new System.Drawing.Size(76, 26);
