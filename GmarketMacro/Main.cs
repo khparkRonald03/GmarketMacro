@@ -1266,8 +1266,12 @@ namespace GmarketMacro
                     WriteMacroLog("테이블 클릭");
                     if (!action.DoubleClickGoodsTableRow("//*[@id='__grid_grid']/div[2]/table/tbody/tr[2]/td[1]", WriteAdminCrawlerLog))
                     {
-                        StopGetAdminAddData("-상품코드 테이블 클릭 중 오류가 발생되었습니다.");
-                        WriteMacroLog("-상품코드 테이블 클릭 중 오류가 발생되었습니다.");
+                        if (AddFaildGoods.All(f => f.GooodsCode != dataModel.GooodsCode))
+                            continue;
+                        //StopGetAdminAddData("-상품코드 테이블 클릭 중 오류가 발생되었습니다.");
+                        //WriteMacroLog("-상품코드 테이블 클릭 중 오류가 발생되었습니다.");
+                        AddFaildGoods.Add(new DataModel() { GooodsCode = dataModel.GooodsCode });
+                        WriteAdminCrawlerLog("상품 정보 없음 : 상품 정보가 없어 다음 상품명 수집으로 넘어갑니다.");
                         continue;
                     }
 
