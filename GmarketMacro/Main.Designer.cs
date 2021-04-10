@@ -298,7 +298,6 @@
             this.iTalk_ThemeContainer.SmartBounds = false;
             this.iTalk_ThemeContainer.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.iTalk_ThemeContainer.TabIndex = 0;
-            this.iTalk_ThemeContainer.Text = "Concentrix & Gmarket";
             // 
             // iTalk_ControlBox1
             // 
@@ -570,6 +569,7 @@
             this.lvCrawlerLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvCrawlerLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvCrawlerLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvCrawlerLog.HideSelection = false;
             this.lvCrawlerLog.Location = new System.Drawing.Point(5, 28);
             this.lvCrawlerLog.Name = "lvCrawlerLog";
             this.lvCrawlerLog.Size = new System.Drawing.Size(788, 329);
@@ -718,6 +718,7 @@
             this.lvAdminCrawlerLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvAdminCrawlerLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvAdminCrawlerLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvAdminCrawlerLog.HideSelection = false;
             this.lvAdminCrawlerLog.Location = new System.Drawing.Point(5, 28);
             this.lvAdminCrawlerLog.Name = "lvAdminCrawlerLog";
             this.lvAdminCrawlerLog.Size = new System.Drawing.Size(788, 329);
@@ -836,6 +837,7 @@
             this.lvMacroLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lvMacroLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvMacroLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvMacroLog.HideSelection = false;
             this.lvMacroLog.Location = new System.Drawing.Point(5, 28);
             this.lvMacroLog.Name = "lvMacroLog";
             this.lvMacroLog.Size = new System.Drawing.Size(788, 329);
@@ -856,7 +858,6 @@
             this.MinimumSize = new System.Drawing.Size(953, 621);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Concentrix & Gmarket";
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.Load += new System.EventHandler(this.Main_Load);
             this.iTalk_ThemeContainer.ResumeLayout(false);
